@@ -29,7 +29,34 @@ pip install https://github.com/kpu/kenlm/archive/master.zip
 ```
 但是没有count_ngrams.
 
-（2）新词发现
+
+(2)分词规则
+```
+# 语料生成器，并且初步预处理语料
+def text_generator(texts,jieba_cut = False ):
+    '''
+    基于jieba分词来判定的
+    一般默认为字
+    ['你\n', '是\n', '谁\n']
+    '''
+    for text in texts:
+        text = re.sub(u'[^\u4e00-\u9fa50-9a-zA-Z ]+', '\n', text)
+        if jieba_cut:
+            yield ' '.join(list(jieba.cut(text))) + '\n'
+        else:
+            yield ' '.join(text) + '\n'
+```
+之前苏神的方式里面只有按字分开，这边自己尝试了用jieba先分词，再去进行组合的方式。笔者用相关数据输出的结果：
+分词结果：
+
+![分词结果](https://github.com/mattzheng/word-discovery/blob/master/jieba_cut_out.png)
+
+按字节分开的结果：
+![按字分开的结果](https://github.com/mattzheng/word-discovery/blob/master/word_out.png)
+
+结果好像差不多。。可能分词效果好一丢丢
+
+（3）新词发现
 
 没有跟苏神一样，这边新词发现的筛选规则更加的偏向业务。
 
@@ -45,6 +72,7 @@ jieba词性表：https://blog.csdn.net/orangefly0214/article/details/81391539
 
 好词性：
     n,v,ag,a,zg,d(副词)
+
 
 
 
