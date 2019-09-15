@@ -13,6 +13,7 @@
 
 
 ## 20190915新增
+
 （1）Kenlm的安装
 
 其中,苏神中用到的count_ngrams是需要额外加载的，需要编译：
@@ -31,6 +32,7 @@ pip install https://github.com/kpu/kenlm/archive/master.zip
 
 
 (2)分词规则
+
 ```
 # 语料生成器，并且初步预处理语料
 def text_generator(texts,jieba_cut = False ):
@@ -47,14 +49,18 @@ def text_generator(texts,jieba_cut = False ):
             yield ' '.join(text) + '\n'
 ```
 之前苏神的方式里面只有按字分开，这边自己尝试了用jieba先分词，再去进行组合的方式。笔者用相关数据输出的结果：
+
 分词结果：
 
 ![分词结果](https://github.com/mattzheng/word-discovery/blob/master/jieba_cut_out.png)
 
 按字节分开的结果：
+
 ![按字分开的结果](https://github.com/mattzheng/word-discovery/blob/master/word_out.png)
 
+
 结果好像差不多。。可能分词效果好一丢丢
+
 
 （3）新词发现
 
